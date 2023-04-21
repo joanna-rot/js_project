@@ -20,6 +20,45 @@
         .green {
             color: green;
         }
+
+        .open-button {
+         background-color: #F0F0F0;
+         color: black;
+         padding: 16px 20px;
+         border: outset;
+         cursor: pointer;
+         opacity: 0.8;
+         position: fixed;
+         bottom: 23px;
+         right: 28px;
+         width: 280px;
+         }
+
+         .chatWindow {
+          display: none;
+          position: fixed;
+          bottom: 0;
+          right: 15px;
+          border: 3px solid #f1f1f1;
+          z-index: 9;
+         }
+
+          .formBox {
+          max-width: 300px;
+          padding: 10px;
+          background-color: white;
+          }
+
+          .formBox textarea {
+          width: 100%;
+          padding: 15px;
+          margin: 5px 0 22px 0;
+          border: none;
+          background: #f1f1f1;
+          resize: none;
+          min-height: 200px;
+          }
+
     </style>
 </head>
 
@@ -44,9 +83,30 @@
 
     <button type="button" onclick="readValues()">Odczytaj wartości</button>
 
+
+    <button class="open-button" onclick="openForm()">Chat</button>
+
+    <div class="chatWindow" id="myForm">
+        <form class="formBox">
+        <h2>Chat własnej roboty</h2>
+            <label>Wiadomość ...</label>
+            <textarea id="myInput" placeholder="Cześć, jak tam zajęcia z JS?" required></textarea>
+            <button type="submit" id="buttonSend" onclick="javascript:alert('test enter!')">Wyślij</button>
+            <button type="button" id="buttonCancel" onclick="closeForm()">Zamknij</button>
+        </form>
+    </div>
+
 </div>
 
 <script>
+
+var input = document.getElementById("myInput");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("buttonSend").click();
+  }
+});
 
 function readValues() {
         const checked = document.getElementById("myCheckbox").checked;
@@ -82,6 +142,13 @@ function readValues() {
     }
 
 
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
 </script>
 
 </body>
